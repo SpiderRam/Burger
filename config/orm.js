@@ -4,18 +4,18 @@ connection.connect(function(err) {
     if (err) {
       console.log(err.message);
       return;
-    }; 
+    } 
 });
 
 function ManageDb() {
-    
+
     this.selectAll = function() {
         connection.query("SELECT * FROM burgers", function(err, results) {
             if (err) {
-                throw err;
+                console.log("Problem with selectAll: " + err);
             } else {
-            console.table(results);
-            };
+                console.table(results);
+            }
         });
     };
 
@@ -23,13 +23,15 @@ function ManageDb() {
         connection.query(
             "INSERT INTO burgers SET ?",
             {
-                burger_name: ,
+                burger_name: "",
                 devoured: false
             },
             function (err) {
                 if (err) {
-                    console.log(err);
-                };
+                    console.log("Problem with insertOne: " + err);
+                } else {
+                    console.log("Inserted successfully.");
+                }
             }
         );
     };
@@ -39,19 +41,21 @@ function ManageDb() {
             "UPDATE products SET ? WHERE ?",
             [
                 {
-                    :  
+                    devoured: true  
                 },
                 {
-                    : 
+                    burger_name: "" 
                 }
             ],
             
             function (err) {
                 
                 if (err) {
-                    console.log("oops " + err);
+                    console.log("Problem with updateOne: " + err);
                     
-                } 
+                } else {
+                    console.log("Update successful.");
+                }
             }  
             
         );
