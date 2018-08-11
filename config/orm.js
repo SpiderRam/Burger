@@ -12,9 +12,9 @@ function ManageDb() {
     this.selectAll = function() {
         connection.query("SELECT * FROM burgers", function(err, results) {
             if (err) {
-                console.log("Problem with selectAll: " + err);
+                return res.status(500).end();
             } else {
-                console.table(results);
+                res.status(200).end();
             }
         });
     };
@@ -28,9 +28,9 @@ function ManageDb() {
             },
             function (err) {
                 if (err) {
-                    console.log("Problem with insertOne: " + err);
+                    return res.status(500).end();
                 } else {
-                    console.log("Inserted successfully.");
+                    res.status(200).end();
                 }
             }
         );
@@ -51,10 +51,10 @@ function ManageDb() {
             function (err) {
                 
                 if (err) {
-                    console.log("Problem with updateOne: " + err);
+                    return res.status(500).end();
                     
                 } else {
-                    console.log("Update successful.");
+                    res.status(200).end();
                 }
             }  
             
